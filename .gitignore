@@ -1,3 +1,13 @@
-
+# ignore environment
+vs
 .venv
+
+# dataset folder
 deepfashion2
+__pycache__
+
+# log folder
+slurm-out
+
+# cache
+__pycache__/

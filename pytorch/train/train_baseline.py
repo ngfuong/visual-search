@@ -77,10 +77,13 @@ def main():
     MODEL = MODEL.to(DEVICE)
     MODEL_PATH = cfg['ckpt']
     # Once you have trained this model and have a checkpoint, replace None with the path to the checkpoint
-    try :
-        MODEL.load_state_dict(torch.load(MODEL_PATH))
-    except :
-        raise ValueError('Cannot load checkpoiht')
+    if MODEL_PATH is None:
+        print("No checkpoint specified. Training from scratch...")
+    else:
+        try:
+            MODEL.load_state_dict(torch.load(MODEL_PATH))
+        except:
+            raise ValueError('Cannot load checkpoint.')
 
     # Loss and optimizer
     OPTIMIZER = torch.optim.SGD(MODEL.parameters(), lr = cfg['lr'], momentum=0.9)
@@ -154,4 +157,5 @@ def main():
             raise ValueError('Cannot save checkpoint')
 
 if __name__=="__main__":
+    print("Running train_baseline.py...")
     main()
